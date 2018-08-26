@@ -281,6 +281,13 @@ var reverseArr = function(array) {
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
 var buildList = function(value, length) {
+	var newArr = []
+	if (length === 0) {
+		return newArr;
+	} else {
+		newArr.push(value);
+		return newArr.concat(buildList(value, length-1));
+	}
 };
 
 // 19. Implement FizzBuzz. Given integer n, return an array of the string representations of 1 to n.
@@ -289,27 +296,51 @@ var buildList = function(value, length) {
 // For numbers which are multiples of both three and five, output “FizzBuzz” instead of the number.
 // fizzBuzz(5) // ['1','2','Fizz','4','Buzz']
 var fizzBuzz = function(n) {
-	// var newArr = [];
-	// if (n%3 === 0 && n%5 === 0) {
-	// 	newArr.push('FizzBuzz');
-	// } else if (n%3 === 0) {
-	// 	newArr.push('Fizz');
-	// } else if (n%5 === 0) {
-	// 	return 'Buzz';
-	// } else {
-	// 	return 
-	// }
+	var newArr = [];
+	if (n === 0) {
+		return newArr;
+	} else {
+		if (n%3 === 0 && n%5 === 0) {
+			newArr.push('FizzBuzz');
+			return (fizzBuzz(n-1)).concat(newArr);
+		} else if (n%3 === 0) {
+			newArr.push('Fizz');
+			return (fizzBuzz(n-1)).concat(newArr);
+		} else if (n%5 === 0) {
+			newArr.push('Buzz');
+			return (fizzBuzz(n-1)).concat(newArr);
+		} else {
+			newArr.push(n.toString());
+			return (fizzBuzz(n-1)).concat(newArr);
+		}
+	}
 };
 
 // 20. Count the occurence of a value in a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 var countOccurrence = function(array, value) {
+	var count = 0;
+	if (array.length === 0) {
+		return count;
+	} else {
+		if (array[0] === value) {
+			count++
+		}
+		return count += countOccurrence(array.slice(1), value)
+	}
 };
 
 // 21. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function(array, callback) {
+	var newArr = [];
+	if (array.length === 0) {
+		return newArr;
+	} else {
+		newArr.push(callback(array[0]));
+		return newArr.concat(rMap(array.slice(1), callback))
+	}
 };
 
 // 22. Write a function that counts the number of times a key occurs in an object.
@@ -337,6 +368,7 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {
 // fibonacci(5); // [0,1,1,2,3,5]
 // Note: The 0 is not counted.
 var fibonacci = function(n) {
+
 };
 
 // 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
